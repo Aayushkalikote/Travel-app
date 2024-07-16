@@ -15,7 +15,7 @@ class AuthController extends Controller
             'name'=>'required|string',
             'username'=>'required|string',
             'email'=>'required|string|email|unique:users',
-            'phone_number'=>['required', 'string', 'max:10'],
+            'phone_number'=>['required','max:10'],
             'password' => ['required','confirmed', RulesPassword::min(8)->letters()
             ->mixedCase()
             ->numbers()
@@ -30,6 +30,7 @@ class AuthController extends Controller
             'password' => Hash::make($registerUserData['password']),
         ]);
         return response()->json([
+            'status' => true,
             'message' => 'User Created Succesfully',
         ]);
     }
@@ -46,6 +47,7 @@ class AuthController extends Controller
         }
         $token = $user->createToken($user->name.'-AuthToken')->plainTextToken;
         return response()->json([
+            'status' => true,
             'message' => 'Login Successfull',
             'access_token' => $token,
         ]);
@@ -56,7 +58,8 @@ class AuthController extends Controller
         auth()->user()->tokens()->delete();
 
         return response()->json([
-          "message"=>"logged out successfully"
+          'status'=>true,
+          'message'=>'logged out successfully'
         ]);
     }
 
