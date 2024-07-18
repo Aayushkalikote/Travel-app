@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             'phone_number' => '9845646116',
             'email' => 'admin@admin.com',
             'password' => 'password',
+            'role' => 'admin',
         ]);
         $user = User::create([
             'name' => 'Traveler',
@@ -26,6 +27,7 @@ class UserSeeder extends Seeder
             'phone_number' => '9845646116',
             'email' => 'traveler@mail.com',
             'password' => 'password',
+            'role' => 'user',
         ]);
         $user->save();
     }
